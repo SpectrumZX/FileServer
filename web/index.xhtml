@@ -10,17 +10,17 @@
     </h:head>
     <h:body>
 
-         <f:view>
-             <h:form>
-                 <h:inputText size="30" label="Заголовок" value="#{dataAccess.searchRequest}" required="true"/>
-                 <h:commandButton value="Искать" action="search.xhtml"/>
-                 <br/>
-                 <h:selectBooleanCheckbox value="#{dataAccess.wcards}">Расширеный поиск (wildcards)</h:selectBooleanCheckbox>
-                
-             </h:form>
-             
-             
-<p/>
+        <f:view>
+            <h:form>
+                <h:inputText size="30" label="Заголовок" value="#{dataAccess.searchRequest}" required="true"/>
+                <h:commandButton value="Искать" action="search.xhtml"/>
+                <br/>
+                <h:selectBooleanCheckbox value="#{dataAccess.wcards}">Расширеный поиск (wildcards)</h:selectBooleanCheckbox>
+
+            </h:form>
+
+
+            <p/>
             <h:form>
                 <h2><h:outputText value="File Server"/></h2>
                 <h:dataTable value="#{dataAccess.getAllFiles()}" var="item">
@@ -43,14 +43,14 @@
                         <h:outputText value="#{item.hash}"/>
                     </h:column>
                     <h:column> 
-                    <h:outputLink value="download">скачать<f:param name="file_name" value="#{item.name}" /></h:outputLink>
+                        <h:outputLink value="download">скачать<f:param name="file_name" value="#{item.name}" /></h:outputLink>
                     </h:column>
 
                     <h:column>
-                    <h:outputLink value="delete">delete
-                    <f:param name="file_name" value="#{item.name}" />
-                    <f:param name="id" value="#{item.id}" />
-                    </h:outputLink>
+                        <h:outputLink value="delete">delete
+                            <f:param name="file_name" value="#{item.name}" />
+                            <f:param name="id" value="#{item.id}" />
+                        </h:outputLink>
                     </h:column>
                 </h:dataTable>
             </h:form>
@@ -60,13 +60,13 @@
         <h:form id="form" enctype="multipart/form-data">
             <h:inputFile id="file" value="#{fileUtil.file}"/>
             <h:commandButton value="Загрузить" action="#{fileUtil.upload()}"/>
-            
+
             <p/>    <h:outputText value="#{fileUtil.message}" />
         </h:form>
 
-        
 
-        
+
+
 
     </h:body>
 
