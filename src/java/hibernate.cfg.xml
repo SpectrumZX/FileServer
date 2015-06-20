@@ -8,6 +8,7 @@
     <property name="hibernate.connection.characterEncoding">UTF-8</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">7777</property>
+    <property name="hibernate.hbm2ddl.auto">update</property>
     <mapping class="fileserver.beans.DataAccess"/>
     <mapping class="fileserver.beans.FilesEntity"/>
     <mapping class="fileserver.beans.HibernateUtil"/>
