@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+          <h:outputStylesheet name="./css/styles.css"/>
+        <title>FileServer</title>
+    </h:head>
+    <h:body>
+    
+        
+         <f:view>
+             <h:form>
+                 <h:inputText size="30" label="Заголовок" value="#{dataAccess.searchRequest}" required="true"/>
+                 <h:commandButton value="Искать" action="search.xhtml"/>
+                 <br/>
+                 <h:selectBooleanCheckbox value="#{dataAccess.wcards}">Расширеный поиск (wildcards)</h:selectBooleanCheckbox>
+             </h:form>
+             
+             
+<p/>
+            <h:form>
+                <h2><h:outputText value="Результаты поиска"/></h2>
+                <h:dataTable value="#{dataAccess.findFileByName()}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Name"/>
+                        </f:facet>
+                        <h:outputText value="#{item.name}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Hash"/>
+                        </f:facet>
+                        <h:outputText value="#{item.hash}"/>
+                    </h:column>
+                    <h:column> 
+                    <h:outputLink value="download">скачать<f:param name="file_name" value="#{item.name}" /></h:outputLink>
+                    </h:column>
+
+                    <h:column>
+                    <h:outputLink value="delete">delete
+                    <f:param name="file_name" value="#{item.name}" />
+                    <f:param name="id" value="#{item.id}" />
+                    </h:outputLink>
+                    </h:column>
+                </h:dataTable>
+                <p/>
+                <h:link outcome="./index.xhtml" >На главную</h:link>
+                <p/>    <h:outputText value="#{dataAccess.message}" />
+            </h:form>
+        </f:view>        
+    </h:body>
+</html>
+
