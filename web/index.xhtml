@@ -58,7 +58,7 @@
 
         <p/>
         <h:form id="form" enctype="multipart/form-data">
-            <h:inputFile id="file" value="#{fileUtil.file}"/>
+            <h:inputFile id="file" size="100" value="#{fileUtil.file}"/>
             <h:commandButton value="Загрузить" action="#{fileUtil.upload()}"/>
 
             <p/>    <h:outputText value="#{fileUtil.message}" />
