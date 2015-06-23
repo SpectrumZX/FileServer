@@ -29,7 +29,7 @@ public class DataAccess {
     public FilesEntity getFile(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         file = (FilesEntity) session.get(FilesEntity.class, id);
-        session.close();
+       // session.close();
         return file;
     }
 
@@ -55,7 +55,7 @@ public class DataAccess {
         session.delete(file);
         session.flush();
         session.getTransaction().commit();
-        session.close();
+        //session.close();
     // удаляем сам файл
 
         File del_file = new File("/resources/files/" + file.getName());
@@ -88,7 +88,7 @@ public class DataAccess {
             session.saveOrUpdate(file_entity);
             session.flush();
             session.getTransaction().commit();
-            session.close();
+           // session.close();
             return true;
         } else {
             message = "Файл с таким хэшем уже существует";
