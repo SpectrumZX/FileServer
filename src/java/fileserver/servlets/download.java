@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLEncoder;
 
 @WebServlet(name = "download", urlPatterns = {"/download"})
 public class download extends HttpServlet {
@@ -16,6 +17,7 @@ public class download extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
+       
         try (PrintWriter out = response.getWriter()) {
  
 //            out.println("<!DOCTYPE html>");
@@ -34,11 +36,12 @@ public class download extends HttpServlet {
 //            out.println("</html>");
             
             String file_name = request.getParameter("file_name");
-         response.reset();
-          response.setContentType("application/x-download");
-        response.setHeader("Content-Disposition", "attachment;filename=" + file_name);
-        request.getRequestDispatcher("/resources/files/" + file_name).forward(request, response); 
-       
+            
+            String file_name_encoded = URLEncoder.encode(file_name, "UTF-8");  // кодируем имя файла в RFC2231  чтобы НТТП заголовок Content-Disposition понимал русские буквы
+         //   String file_name2 = "file343.xlsx";
+        //  response.setContentType("application/x-download");
+        response.setHeader("Content-Disposition", "attachment;filename="+file_name_encoded);
+        request.getRequestDispatcher("/resources/files/" + file_name).forward(request, response);
             
         }
     }
