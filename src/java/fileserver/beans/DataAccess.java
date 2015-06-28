@@ -29,7 +29,7 @@ public class DataAccess {
     public FilesEntity getFile(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         file = (FilesEntity) session.get(FilesEntity.class, id);
-       // session.close();
+        session.close();
         return file;
     }
 
@@ -37,6 +37,7 @@ public class DataAccess {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<FilesEntity> result = session.createCriteria(FilesEntity.class).list();
+        session.close();
         if (!result.isEmpty()) {
             return result;
         } else {
@@ -55,7 +56,7 @@ public class DataAccess {
         session.delete(file);
         session.flush();
         session.getTransaction().commit();
-        //session.close();
+        session.close();
     // удаляем сам файл
 
         File del_file = new File("/resources/files/" + file.getName());
@@ -88,7 +89,7 @@ public class DataAccess {
             session.saveOrUpdate(file_entity);
             session.flush();
             session.getTransaction().commit();
-           // session.close();
+            session.close();
             return true;
         } else {
             message = "Файл с таким хэшем уже существует";
@@ -108,6 +109,7 @@ public class DataAccess {
         Criteria cr = session.createCriteria(FilesEntity.class);
         cr.add(Restrictions.like("hash", hash));
         List<FilesEntity> result = cr.list();
+        session.close();
         return result.iterator().hasNext();
 
     }
@@ -125,7 +127,7 @@ public class DataAccess {
         SQLQuery query = session.createSQLQuery(sql);
         query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
         List<FilesEntity> result = query.list();
-
+        session.close();
         if (result.isEmpty()) {
             file.setHash("Ничего не найдено. Используйте '%' для расширенного поиска");
             result.add(file);
